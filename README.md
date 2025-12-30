@@ -4,7 +4,9 @@ A high-precision, real-time temporal dashboard that visualizes the progress of t
 
 ## Features
 
-- **High-Precision Progress**: Tracks the completion of the year down to 7 decimal places, updated in real-time every second.
+- **Balanced Progress Tracking**:
+  - **Visuals**: The current day's dot fills vertically in real-time every second.
+  - **Data**: The completion percentage updates hourly (with 2 decimal precision) to provide a stable, dashboard-like feel.
 - **Micro-Fill Visualization**: Each day is represented by a dot that fills vertically as the 24-hour day passes.
 - **Performance Optimized**:
   - Uses specialized React memoization logic to skip rendering for 364/365 dots every second.
@@ -45,4 +47,4 @@ bun run build
 
 ## How It Works
 
-The app calculates progress using the millisecond delta between the start of the current year and the present moment, divided by the total duration of the year (automatically accounting for leap years). The UI is built using a CSS Grid where each node is a memoized component that only re-renders if its status (past/present/future) changes.
+The app calculates year completion based on hours elapsed to ensure a stable and meaningful percentage update. It automatically accounts for leap years and dynamically pivots its layout between mobile portrait and desktop landscape orientations.
