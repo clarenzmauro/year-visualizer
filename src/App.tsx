@@ -54,13 +54,12 @@ function App() {
     return () => clearInterval(timer);
   }, []);
 
-  const { year, totalDays, startOfYear, totalMs, days } = useMemo(() => {
+  const { year, totalDays, startOfYear, days } = useMemo(() => {
     const year = now.getFullYear();
     const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
     const totalDays = isLeapYear ? 366 : 365;
     const startOfYearDate = new Date(year, 0, 1);
     const startOfYear = startOfYearDate.getTime();
-    const endOfYear = new Date(year + 1, 0, 1).getTime();
 
     const days = Array.from({ length: totalDays }, (_, i) => {
       const dayNum = i + 1;
@@ -78,13 +77,14 @@ function App() {
       year,
       totalDays,
       startOfYear,
-      totalMs: endOfYear - startOfYear,
       days,
     };
   }, [now.getFullYear()]);
 
   const elapsedMs = now.getTime() - startOfYear;
-  const progress = Math.min(100, Math.max(0, (elapsedMs / totalMs) * 100));
+  const hoursInYear = totalDays * 24;
+  const hoursElapsed = Math.floor(elapsedMs / (1000 * 60 * 60));
+  const progress = Math.min(100, Math.max(0, (hoursElapsed / hoursInYear) * 100));
   const currentDay = Math.floor(elapsedMs / (1000 * 60 * 60 * 24)) + 1;
   const daysLeft = totalDays - currentDay;
 
@@ -137,7 +137,7 @@ function App() {
         <div className="text-lg md:text-[3vh] font-light tracking-wide">
           <span className="text-danger font-medium">{daysLeft}d left</span>
           <span className="mx-2 text-white/20">·</span>
-          <span className="text-white/40">{progress.toFixed(7)}%</span>
+          <span className="text-white/40">{progress.toFixed(2)}%</span>
         </div>
       </footer>
 
