@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #ffffff;
+  --color-bg-dark: #000000;
+  --color-dot-empty: #404044;
+  --color-text-secondary: #8e8e93;
+  --color-danger: #ff3b30;
+}
+
+@utility grid-cols-18 {
+  grid-template-columns: repeat(18, minmax(0, 1fr));
+}
+
+@utility grid-cols-40 {
+  grid-template-columns: repeat(40, minmax(0, 1fr));
+}
+
+:root {
+  background-color: black;
+  color: white;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
